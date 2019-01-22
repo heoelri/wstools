@@ -46,7 +46,7 @@ Windows Registry Editor Version 5.00
 install-windowsfeature web-server, Web-ISAPI-Filter -includemanagementtools
 ```
 
-4. Delete the default web site
+4. Remove the default web site
 5. Create a folder d:\symbols
 6. Set file and share permissions on d:\symbols
 
@@ -158,7 +158,9 @@ get-windowsupdatelog -symbolserver  Http://localhost/symbols
 ```
 
 to decode the Windows Update Logs 
+
 14. You might have to handle some issues with your local proxy. The experience is that you need a proxy set at system level, when a proxy is in your environment.
+
 15.  optionally set  a symbols proxy  environment variable   like the following.
 
 ```cmd
