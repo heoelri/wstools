@@ -14,7 +14,8 @@ The debugging tools are available via https://developer.microsoft.com/en-us/wind
 ```
 Windows Registry Editor Version 5.00
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy] "Available Settings"="Remove the 'x' prefix to use the setting"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy] 
+"Available Settings"="Remove the 'x' prefix to use the setting"
 "xNoInternetProxy"=dword:00000001
 "xNoLongerIndexedAuthoritive"=dword:00000001
 "xNoFilePointers"=dword:00000001
@@ -37,7 +38,8 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy\Web Directories]
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy\Web Directories\Symbols] "SymbolPath"="https://msdl.microsoft.com/download/symbols"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Symbol Server Proxy\Web Directories\Symbols]
+"SymbolPath"="https://msdl.microsoft.com/download/symbols"
 ```
 
 3. Install the iis role with isapi filters enabled.
