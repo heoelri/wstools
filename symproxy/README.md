@@ -150,7 +150,14 @@ where Domain\user is the name of the user you granted permissions on the folder.
  
 11. Set symbol path to Http://localhost/symbols produces the following symbols loading output.
 
-12. In the debugger command prompt type !sym noisy and .reload /f notepad.exe when these commands return the proxy is running 
+12. In the debugger command prompt type 
+
+```
+!sym noisy
+.reload /f notepad.exe
+```
+
+when these commands return the proxy is running 
 13. Use 
 
 ```powershell
