@@ -50,12 +50,13 @@ install-windowsfeature web-server, Web-ISAPI-Filter -includemanagementtools
 
 4. Remove the default web site
 5. Create a folder d:\symbols
-6. Set file and share permissions on d:\symbols
+6. Create a local user / or leverage a domain user for our IIS AppPool
+7. Set file and share permissions on d:\symbols
 
-Everyone:  Read Write On file and share
-Grant Read\Write to the SymProxy App Pool user account (Domain\User) to the folder
+ * Share: Everyone Read/Write
+ * File: Read\Write to the SymProxy App Pool user account (Domain\User) 
 
-7.  You need two files  to install the symproxy now. The files  are "install.cmd" and  "staticContentClear.xml"   
+8.  You need two files  to install the symproxy now. The files  are "install.cmd" and  "staticContentClear.xml"   
 Generate these files with the content below and  copy them to  c:\debuggers\symproxy  
  
 Install.cmd
@@ -127,7 +128,7 @@ StaticContentClear.xml is used by install.cmd to configure iis. It must look as 
 </appcmd>
 ``` 
  
-8. Use install.cmd to configure iis as a symproxy
+9. Use install.cmd to configure iis as a symproxy
  
 The Install.cmd script requires 3 parameters:
  * Virtual Directory path (e.g. D:\SymStore\Symbols )
@@ -147,30 +148,31 @@ Install.cmd D:\Symbols CONTOSO\SymProxyService Pa$$word
 
 where Domain\user is the name of the user you granted permissions on the folder.  This user will be configured as the app pool user. 
  
-9. Start the debugger c:\debuggers\windbg 
-10. Start notepad under the debugger 
+10. Start the debugger c:\debuggers\windbg 
+11. Start notepad under the debugger 
  
-11. Set symbol path to Http://localhost/symbols produces the following symbols loading output.
+12. Set symbol path to http://localhost/symbols produces the following symbols loading output.
 
-12. In the debugger command prompt type 
+13. In the debugger command prompt type 
 
 ```
 !sym noisy
 .reload /f notepad.exe
 ```
 
-when these commands return the proxy is running 
-13. Use 
+when these commands return something the proxy is running and you'll see in parallel that the first symbols show up in %VirDirectory%
+
+14. Besides WinDbg you can use **Get-WindowsUpdateLog** (in Windows Server 2016) to leverage a Symbol Server
 
 ```powershell
-get-windowsupdatelog -symbolserver  Http://localhost/symbols 
+Get-WindowsUpdateLog -symbolserver  http://localhost/symbols 
 ```
 
-to decode the Windows Update Logs 
+This is needed to decode the Windows Update Logs w/o Internet Connectivity.
 
-14. You might have to handle some issues with your local proxy. The experience is that you need a proxy set at system level, when a proxy is in your environment.
+15. You might have to handle some issues with your local proxy. The experience is that you need a proxy set at system level, when a proxy is in your environment.
 
-15.  optionally set  a symbols proxy  environment variable   like the following.
+16.  optionally set  a symbols proxy  environment variable   like the following.
 
 ```cmd
 set _nt_symbol_path=Http://localhost/symbols
